@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LettR</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Landing Page -->
+    <div id="landing-page" class="page active">
+        <div class="background-effects">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+        </div>
+
+        <div class="container">
+            <header class="landing-header">
+                <h1 class="game-title">Lett<span class="title-red">R</span></h1>
+                <p class="game-subtitle">Word Duels</p>
+            </header>
+
+            <div class="player-setup">
+                <div class="player-card player-1-card">
+                    <div class="player-indicator">
+                        <div class="player-avatar p1-avatar"><span>P1</span></div>
+                        <span class="player-label">Player 1</span>
+                    </div>
+                    <input type="text" id="player1-name" class="player-input p1-input" placeholder="Name (optional)" maxlength="10">
+                </div>
+
+                <div class="vs-divider"><span>VS</span></div>
+
+                <div class="player-card player-2-card">
+                    <div class="player-indicator">
+                        <div class="player-avatar p2-avatar"><span>P2</span></div>
+                        <span class="player-label">Player 2</span>
+                    </div>
+                    <input type="text" id="player2-name" class="player-input p2-input" placeholder="Name (optional)" maxlength="10">
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button id="play-btn" class="btn btn-white">Play Now</button>
+                <button id="rules-btn" class="btn btn-secondary">Rules</button>
+            </div>
+
+            <footer class="landing-footer">
+                <p>Made with care By <a href="https://github.com/Swarup113" target="_blank" rel="noopener noreferrer" class="footer-link">Swarup Dewanjee</a></p>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Rules Modal -->
+    <div id="rules-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="rules-title">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="close-rules" aria-label="Close rules">&times;</button>
+            <h2 class="modal-title" id="rules-title">Rules</h2>
+            <div class="rules-list">
+                <div class="rule-item">
+                    <span class="rule-number">1</span>
+                    <p class="rule-text">Each player gets their own random letter every round.</p>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-number">2</span>
+                    <p class="rule-text">Fill in Name, Place, Movie, and Thing starting with that letter.</p>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-number">3</span>
+                    <p class="rule-text">Name, Place, and Movie are accepted if they start with the correct letter (min 2 characters).</p>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-number">4</span>
+                    <p class="rule-text">Thing is validated via Dictionary API — it must be a real English word.</p>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-number">5</span>
+                    <p class="rule-text">Complete all fields correctly to score 1 point.</p>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-number">6</span>
+                    <p class="rule-text">If both score, the faster player gets a +1 Speed Bonus. Game lasts 5 rounds.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Page -->
+    <div id="game-page" class="page">
+        <div class="background-effects">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+        </div>
+
+        <div id="validation-overlay" class="validation-overlay">
+            <div class="validation-spinner"></div>
+            <p>Validating...</p>
+        </div>
+
+        <div id="handoff-overlay" class="handoff-overlay">
+            <div class="handoff-content">
+                <p class="handoff-text">Pass the device to</p>
+                <h2 id="handoff-player-name" class="handoff-name">Player 2</h2>
+                <p class="handoff-hint">Don't peek at the letter!</p>
+                <button id="handoff-ready-btn" class="btn btn-white btn-sm">I'm Ready</button>
+            </div>
+        </div>
+
+        <div class="game-container">
+            <header class="game-header">
+                <div class="round-indicator">
+                    <span>Round</span>
+                    <strong><span id="round-number">1</span>/5</strong>
+                </div>
+                <div class="score-display">
+                    <div class="score p1-score-display"><span id="p1-score">0</span></div>
+                    <span class="score-divider">-</span>
+                    <div class="score p2-score-display"><span id="p2-score">0</span></div>
+                </div>
+                <button id="game-quit-btn" class="btn-quit" aria-label="Quit game">&#10005;</button>
+            </header>
+
+            <div class="game-info-bar" id="game-info-bar">
+                <div class="info-turn p1-turn" id="current-player-turn">
+                    <span id="turn-player-name">Player 1</span>
+                </div>
+                <div class="info-letter">
+                    <span id="current-letter">A</span>
+                </div>
+                <div class="info-timer">
+                    <svg class="timer-svg" viewBox="0 0 100 100">
+                        <circle class="timer-bg" cx="50" cy="50" r="45"></circle>
+                        <circle id="timer-progress" class="timer-progress" cx="50" cy="50" r="45"></circle>
+                    </svg>
+                    <span id="timer-seconds">60</span>
+                </div>
+            </div>
+
+            <div class="game-main" id="game-main" data-turn="p1">
+                <form id="game-form" class="game-form">
+                    <div class="form-grid">
+                        <div class="input-row">
+                            <label for="input-name">Name</label>
+                            <input type="text" id="input-name" class="game-input" placeholder="Name..." autocomplete="off" maxlength="30">
+                        </div>
+                        <div class="input-row">
+                            <label for="input-place">Place</label>
+                            <input type="text" id="input-place" class="game-input" placeholder="Place..." autocomplete="off" maxlength="30">
+                        </div>
+                        <div class="input-row">
+                            <label for="input-movie">Movie</label>
+                            <input type="text" id="input-movie" class="game-input" placeholder="Movie..." autocomplete="off" maxlength="30">
+                        </div>
+                        <div class="input-row">
+                            <label for="input-thing">Thing</label>
+                            <input type="text" id="input-thing" class="game-input" placeholder="Thing..." autocomplete="off" maxlength="30">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-submit btn-white">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quit Modal -->
+    <div id="quit-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="quit-title">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content quit-content">
+            <h2 class="modal-title" id="quit-title">Pause</h2>
+            <p class="quit-text">What would you like to do?</p>
+            <div class="quit-buttons">
+                <button id="resume-btn" class="btn btn-primary">Resume Game</button>
+                <button id="finish-btn" class="btn btn-secondary">Finish Game</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Modal -->
+    <div id="results-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="results-title">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content results-content">
+            <h2 class="modal-title" id="results-title">Round Results</h2>
+            <div id="results-body" class="results-body"></div>
+            <div class="results-buttons">
+                <button id="next-round-btn" class="btn btn-white">Next Round</button>
+                <button id="quit-btn" class="btn btn-secondary">Quit</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div id="gameover-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="gameover-title">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content results-content">
+            <h2 class="modal-title" id="gameover-title">Game Over</h2>
+            <div id="gameover-body" class="results-body"></div>
+            <div class="results-buttons">
+                <button id="play-again-btn" class="btn btn-primary">Play Again</button>
+                <button id="home-btn" class="btn btn-secondary">Home</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
