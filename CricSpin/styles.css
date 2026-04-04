@@ -1,0 +1,647 @@
+/* Reset and Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0d1117;
+    color: #e6edf3;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Footer */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 12px;
+    background-color: #161b22;
+    border-top: 1px solid #30363d;
+    font-size: 0.85rem;
+    color: #8b949e;
+    z-index: 100;
+}
+
+.footer-link {
+    color: #238636;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.footer-link:hover {
+    color: #2ea043;
+    text-decoration: underline;
+}
+
+/* Screens */
+.screen {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Container - Smaller */
+.container {
+    background-color: #161b22;
+    border-radius: 12px;
+    padding: 25px;
+    width: 100%;
+    max-width: 320px;
+    border: 1px solid #30363d;
+    margin-bottom: 60px;
+}
+
+/* Game Container - Smaller */
+.game-container {
+    background-color: #161b22;
+    border-radius: 12px;
+    padding: 12px;
+    width: 100%;
+    max-width: 480px;
+    border: 1px solid #30363d;
+    margin-bottom: 60px;
+}
+
+/* Titles */
+.title {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #58a6ff;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 15px;
+    color: #58a6ff;
+}
+
+/* Settings Box */
+.settings-box {
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 12px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #8b949e;
+    font-size: 0.85rem;
+}
+
+.input-group input[type="text"] {
+    width: 100%;
+    padding: 10px 12px;
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    color: #e6edf3;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+}
+
+.input-group input[type="text"]:focus {
+    outline: none;
+    border-color: #58a6ff;
+}
+
+.input-group input::placeholder {
+    color: #484f58;
+}
+
+/* Counter */
+.counter-group {
+    margin-bottom: 12px;
+}
+
+.counter-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #8b949e;
+    font-size: 0.85rem;
+}
+
+.counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.counter-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    background-color: #21262d;
+    border: 1px solid #30363d;
+    color: #e6edf3;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.counter-btn:hover {
+    background-color: #30363d;
+}
+
+.counter input[type="number"] {
+    width: 50px;
+    padding: 6px;
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    color: #e6edf3;
+    font-size: 1.1rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+.counter input[type="number"]:focus {
+    outline: none;
+    border-color: #58a6ff;
+}
+
+/* Remove number input arrows */
+.counter input[type="number"]::-webkit-outer-spin-button,
+.counter input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.counter input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* Buttons */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn {
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background-color: #238636;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #2ea043;
+}
+
+.btn-secondary {
+    background-color: #21262d;
+    color: #e6edf3;
+    border: 1px solid #30363d;
+}
+
+.btn-secondary:hover {
+    background-color: #30363d;
+}
+
+.btn-toss {
+    background-color: #21262d;
+    color: #e6edf3;
+    border: 1px solid #30363d;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+}
+
+.btn-toss:hover {
+    background-color: #30363d;
+}
+
+/* Play and Quit buttons container */
+.play-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 12px;
+    justify-content: center;
+}
+
+.btn-play {
+    background-color: #238636;
+    color: #ffffff;
+    padding: 12px 36px;
+    font-size: 1.1rem;
+}
+
+.btn-play:hover {
+    background-color: #2ea043;
+}
+
+.btn-play:disabled {
+    background-color: #21262d;
+    color: #484f58;
+    cursor: not-allowed;
+}
+
+.btn-quit-game {
+    background-color: #21262d;
+    color: #e6edf3;
+    border: 1px solid #30363d;
+    padding: 12px 24px;
+    font-size: 1.1rem;
+}
+
+.btn-quit-game:hover {
+    background-color: #30363d;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #161b22;
+    border-radius: 12px;
+    padding: 25px;
+    max-width: 360px;
+    width: 90%;
+    text-align: center;
+    border: 1px solid #30363d;
+}
+
+.modal-content h2 {
+    margin-bottom: 15px;
+    color: #58a6ff;
+}
+
+.modal-content p {
+    margin-bottom: 12px;
+    color: #8b949e;
+}
+
+/* Rules */
+.rules-content {
+    max-width: 400px;
+    text-align: left;
+}
+
+.rules-list p {
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+/* Toss */
+.toss-info {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    color: #8b949e;
+}
+
+.toss-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+/* Scorecard - Compact */
+.scorecard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    background-color: #21262d;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.scorecard-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.team-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.indicator {
+    color: #f0883e;
+    font-size: 0.75rem;
+}
+
+.scorecard-center {
+    text-align: center;
+}
+
+.innings-label {
+    font-size: 0.7rem;
+    color: #8b949e;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.score-display {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.scorecard-right {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.stat-label {
+    font-size: 0.65rem;
+    color: #8b949e;
+}
+
+.stat-value {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Player Stats - Compact */
+.stats-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.player-stats {
+    background-color: #21262d;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.player-stats h3 {
+    font-size: 0.8rem;
+    color: #58a6ff;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.batter-row, .bowler-row {
+    padding: 5px;
+    margin-bottom: 4px;
+    border-radius: 4px;
+    background-color: #161b22;
+    font-size: 0.75rem;
+}
+
+.batter-row.active, .bowler-row.active {
+    border-left: 2px solid #238636;
+}
+
+.batter-name, .bowler-name {
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.batter-stats, .bowler-stats {
+    font-size: 0.65rem;
+    color: #8b949e;
+}
+
+.bowler-indicator {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: #238636;
+    border-radius: 50%;
+    margin-left: 5px;
+}
+
+/* Wheel - Mixed segments with NO adjacent same colors */
+.wheel-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 0;
+}
+
+.wheel {
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    position: relative;
+    /* Mixed segments: 0, 6, RO, WD, 4, NB, C, 2, LB, B, 3, ST, 1, HO */
+    /* NO adjacent same colors - alternating pattern */
+    background: conic-gradient(
+        from 0deg,
+        #22c55e 0deg 25.71deg,      /* 0 - green */
+        #ef4444 25.71deg 51.43deg,   /* 6 - red */
+        #3b82f6 51.43deg 77.14deg,   /* RO - blue */
+        #f59e0b 77.14deg 102.86deg,  /* WD - orange */
+        #22c55e 102.86deg 128.57deg, /* 4 - green */
+        #ef4444 128.57deg 154.29deg, /* NB - red */
+        #3b82f6 154.29deg 180deg,    /* C - blue */
+        #f59e0b 180deg 205.71deg,    /* 2 - orange */
+        #22c55e 205.71deg 231.43deg, /* LB - green */
+        #ef4444 231.43deg 257.14deg, /* B - red */
+        #3b82f6 257.14deg 282.86deg, /* 3 - blue */
+        #f59e0b 282.86deg 308.57deg, /* ST - orange */
+        #22c55e 308.57deg 334.29deg, /* 1 - green */
+        #ef4444 334.29deg 360deg     /* HO - red */
+    );
+    transition: transform 2.5s cubic-bezier(0.2, 0.8, 0.3, 1);
+    box-shadow: 0 0 15px rgba(88, 166, 255, 0.3);
+}
+
+.wheel-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    background-color: #161b22;
+    border-radius: 50%;
+    border: 2px solid #30363d;
+    z-index: 10;
+}
+
+/* Segment text labels */
+.segment-label {
+    position: absolute;
+    font-size: 11px;
+    font-weight: 700;
+    color: #000000;
+    text-shadow: 0 0 2px rgba(255,255,255,0.5);
+    z-index: 5;
+    transform-origin: center;
+    white-space: nowrap;
+}
+
+.arrow {
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 20px solid #f0883e;
+    margin-bottom: -8px;
+    z-index: 10;
+}
+
+/* Ball Result */
+.ball-result {
+    text-align: center;
+    padding: 8px;
+    background-color: #21262d;
+    border-radius: 6px;
+    margin-top: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.ball-result.run {
+    color: #238636;
+}
+
+.ball-result.extra {
+    color: #f0883e;
+}
+
+.ball-result.out {
+    color: #f85149;
+}
+
+/* Free Hit */
+.free-hit-content {
+    border: 2px solid #f0883e;
+}
+
+.free-hit-content h2 {
+    color: #f0883e;
+}
+
+/* Result */
+.result-content {
+    max-width: 400px;
+}
+
+.result-content h2 {
+    font-size: 1.3rem;
+}
+
+.player-awards {
+    margin: 15px 0;
+    padding: 12px;
+    background-color: #21262d;
+    border-radius: 6px;
+}
+
+.award {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid #30363d;
+}
+
+.award:last-child {
+    border-bottom: none;
+}
+
+.award-label {
+    color: #8b949e;
+    font-size: 0.9rem;
+}
+
+.award-value {
+    font-weight: 600;
+    color: #58a6ff;
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+    .game-container {
+        padding: 10px;
+    }
+    
+    .stats-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .wheel {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .segment-label {
+        font-size: 10px;
+    }
+    
+    .wheel-center {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .scorecard {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+    
+    .scorecard-left, .scorecard-right {
+        flex-direction: row;
+        justify-content: center;
+        gap: 15px;
+    }
+    
+    .stat-item {
+        align-items: center;
+    }
+    
+    .play-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+}

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CricSpin</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <!-- Homepage Screen -->
+    <div id="homeScreen" class="screen">
+        <div class="container">
+            <h1 class="title">CricSpin</h1>
+            
+            <div class="settings-box">
+                <div class="input-group">
+                    <label>Team 1 Name</label>
+                    <input type="text" id="team1Name" placeholder="Team 1">
+                </div>
+                
+                <div class="input-group">
+                    <label>Team 2 Name</label>
+                    <input type="text" id="team2Name" placeholder="Team 2">
+                </div>
+                
+                <div class="counter-group">
+                    <label>Overs (1-50)</label>
+                    <div class="counter">
+                        <button class="counter-btn" id="oversMinus">-</button>
+                        <input type="number" id="oversValue" value="2" min="1" max="50">
+                        <button class="counter-btn" id="oversPlus">+</button>
+                    </div>
+                </div>
+                
+                <div class="counter-group">
+                    <label>Wickets (1-10)</label>
+                    <div class="counter">
+                        <button class="counter-btn" id="wicketsMinus">-</button>
+                        <input type="number" id="wicketsValue" value="2" min="1" max="10">
+                        <button class="counter-btn" id="wicketsPlus">+</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" id="startMatchBtn">Start Match</button>
+                <button class="btn btn-secondary" id="rulesBtn">Rules</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rules Modal -->
+    <div id="rulesModal" class="modal hidden">
+        <div class="modal-content rules-content">
+            <h2>Game Rules</h2>
+            <div class="rules-list">
+                <p><strong>Objective:</strong> Score more runs than the opponent to win.</p>
+                <p><strong>Toss:</strong> Team 1 calls Head or Tail. Winner chooses to bat or bowl.</p>
+                <p><strong>Gameplay:</strong> Click "Play" to spin the wheel. The arrow indicates the result.</p>
+                <p><strong>Runs:</strong> 0, 1, 2, 3, 4, 6 - Added to team and batter score.</p>
+                <p><strong>Wide:</strong> +1 extra run, ball not counted.</p>
+                <p><strong>No Ball:</strong> +1 extra run, ball not counted. Next ball is Free Hit (only Run Out counts).</p>
+                <p><strong>Leg By:</strong> +1 extra run, ball counted.</p>
+                <p><strong>Outs:</strong> Catch, Bowled, Stumped, Run Out, Hit Out - Wicket falls, batter changes.</p>
+                <p><strong>Bowler:</strong> Changes automatically after 6 legal balls.</p>
+                <p><strong>Innings End:</strong> When all overs are done or all wickets are lost.</p>
+                <p><strong>Tie:</strong> Super Over - 1 over, 2 wickets. New toss required.</p>
+            </div>
+            <button class="btn btn-primary" id="closeRulesBtn">Close</button>
+        </div>
+    </div>
+
+    <!-- Toss Screen -->
+    <div id="tossScreen" class="screen hidden">
+        <div class="container">
+            <h2 class="subtitle">Toss Time</h2>
+            <p class="toss-info"><span id="tossCaller"></span> - Call it!</p>
+            
+            <div class="toss-buttons">
+                <button class="btn btn-toss" id="headBtn">Head</button>
+                <button class="btn btn-toss" id="tailBtn">Tail</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toss Result Modal -->
+    <div id="tossResultModal" class="modal hidden">
+        <div class="modal-content">
+            <h2 id="tossResultText"></h2>
+            <p id="tossWinnerText"></p>
+            <div id="choiceButtons" class="hidden">
+                <button class="btn btn-primary" id="batFirstBtn">Bat First</button>
+                <button class="btn btn-primary" id="bowlFirstBtn">Bowl First</button>
+            </div>
+            <p id="waitingText" class="hidden"></p>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="gameScreen" class="screen hidden">
+        <div class="game-container">
+            <!-- Scorecard -->
+            <div class="scorecard">
+                <div class="scorecard-left">
+                    <span id="battingTeamName" class="team-name"></span>
+                    <span id="battingIndicator" class="indicator">(Bat)</span>
+                </div>
+                <div class="scorecard-center">
+                    <span id="inningsText" class="innings-label">1st Innings</span>
+                    <div class="score-display">
+                        <span id="teamScore">0</span>/<span id="teamWickets">0</span>
+                    </div>
+                </div>
+                <div class="scorecard-right">
+                    <div class="stat-item">
+                        <span class="stat-label">Wkts Left</span>
+                        <span id="wktsLeft" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Balls Left</span>
+                        <span id="ballsLeft" class="stat-value">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Player Stats -->
+            <div class="stats-container">
+                <div class="player-stats">
+                    <h3>Batting</h3>
+                    <div id="battersList"></div>
+                </div>
+                <div class="player-stats">
+                    <h3>Bowling</h3>
+                    <div id="bowlersList"></div>
+                </div>
+            </div>
+
+            <!-- Spin Wheel -->
+            <div class="wheel-container">
+                <div class="arrow"></div>
+                <div id="wheel" class="wheel">
+                    <div class="wheel-center"></div>
+                </div>
+                <div class="play-buttons">
+                    <button class="btn btn-play" id="playBtn">Play</button>
+                    <button class="btn btn-quit-game" id="quitGameBtn">Quit</button>
+                </div>
+            </div>
+
+            <!-- Ball Result -->
+            <div id="ballResult" class="ball-result hidden"></div>
+        </div>
+    </div>
+
+    <!-- Free Hit Modal -->
+    <div id="freeHitModal" class="modal hidden">
+        <div class="modal-content free-hit-content">
+            <h2>Free Hit!</h2>
+            <p>Next ball is Free Hit.</p>
+            <p>Only Run Out will count as out.</p>
+            <button class="btn btn-primary" id="freeHitOkBtn">OK</button>
+        </div>
+    </div>
+
+    <!-- Innings Break Modal -->
+    <div id="inningsBreakModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Innings Break</h2>
+            <p id="inningsBreakScore"></p>
+            <p id="targetText"></p>
+            <button class="btn btn-primary" id="startSecondInningsBtn">Start 2nd Innings</button>
+        </div>
+    </div>
+
+    <!-- Result Modal -->
+    <div id="resultModal" class="modal hidden">
+        <div class="modal-content result-content">
+            <h2 id="resultTitle"></h2>
+            <p id="resultScore"></p>
+            
+            <div class="player-awards">
+                <div class="award">
+                    <span class="award-label">Most Runs</span>
+                    <span id="mostRunsPlayer" class="award-value"></span>
+                </div>
+                <div class="award">
+                    <span class="award-label">Most Wickets</span>
+                    <span id="mostWicketsPlayer" class="award-value"></span>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button class="btn btn-primary" id="playAgainBtn">Play Again</button>
+                <button class="btn btn-secondary" id="quitBtn">Quit</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="cricspin.js"></script>
+
+    <!-- Footer -->
+    <footer>
+        Made with care by <a href="https://github.com/Swarup113" class="footer-link">Swarup Dewanjee</a>
+    </footer>
+</body>
+</html>

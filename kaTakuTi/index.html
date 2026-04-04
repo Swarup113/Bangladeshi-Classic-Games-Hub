@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kaTakuTi</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Landing Page -->
+    <div id="landing-page" class="page active">
+        <div class="landing-container">
+            <h1 class="game-title">
+                <span class="cyan">k</span><span class="white">a</span><span class="coral">T</span><span class="white">a</span><span class="cyan">k</span><span class="white">u</span><span class="coral">T</span><span class="white">i</span>
+            </h1>
+            <p class="tagline">Battle in Squares</p>
+            
+            <div class="setup-section">
+                <div class="player-inputs">
+                    <div class="player-input">
+                        <div class="player-indicator cyan-bg"></div>
+                        <input type="text" id="player1-name" placeholder="Player 1 (X)" maxlength="15">
+                    </div>
+                    <div class="player-input">
+                        <div class="player-indicator coral-bg"></div>
+                        <input type="text" id="player2-name" placeholder="Player 2 (O)" maxlength="15">
+                    </div>
+                </div>
+                
+                <div class="grid-selection">
+                    <h3>Select Grid Size</h3>
+                    <div class="grid-options">
+                        <button class="grid-option selected" data-size="3">
+                            <span class="grid-preview">
+                                <span></span><span></span><span></span>
+                                <span></span><span></span><span></span>
+                                <span></span><span></span><span></span>
+                            </span>
+                            <span class="grid-label">3 x 3</span>
+                        </button>
+                        <button class="grid-option" data-size="5">
+                            <span class="grid-preview grid-5">
+                                <span></span><span></span><span></span><span></span><span></span>
+                                <span></span><span></span><span></span><span></span><span></span>
+                                <span></span><span></span><span></span><span></span><span></span>
+                                <span></span><span></span><span></span><span></span><span></span>
+                                <span></span><span></span><span></span><span></span><span></span>
+                            </span>
+                            <span class="grid-label">5 x 5</span>
+                        </button>
+                        <button class="grid-option" data-size="7">
+                            <span class="grid-preview grid-7">
+                                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                            </span>
+                            <span class="grid-label">7 x 7</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button id="start-btn" class="btn btn-green">Start kaTakuTi</button>
+                    <button id="rules-btn" class="btn btn-blue">Rules</button>
+                </div>
+            </div>
+        </div>
+        
+        <footer class="footer">
+            Made with care by <a href="https://github.com/Swarup113" target="_blank" class="footer-link">Swarup Dewanjee</a>
+        </footer>
+    </div>
+    
+    <!-- Rules Modal -->
+    <div id="rules-modal" class="modal">
+        <div class="modal-content">
+            <h2>Game Rules</h2>
+            <div class="rules-list">
+                <div class="rule-item">
+                    <span class="rule-grid">3 x 3 Grid</span>
+                    <span class="rule-desc">Get <strong>3</strong> consecutive marks in a row, column, or diagonal to win.</span>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-grid">5 x 5 Grid</span>
+                    <span class="rule-desc">Get <strong>4</strong> consecutive marks in a row, column, or diagonal to win.</span>
+                </div>
+                <div class="rule-item">
+                    <span class="rule-grid">7 x 7 Grid</span>
+                    <span class="rule-desc">Get <strong>5</strong> consecutive marks in a row, column, or diagonal to win.</span>
+                </div>
+            </div>
+            <p class="rules-note">Player 1 uses X (Cyan) and Player 2 uses O (Coral)</p>
+            <button id="close-rules" class="btn btn-green">Got it</button>
+        </div>
+    </div>
+    
+    <!-- Game Page -->
+    <div id="game-page" class="page">
+        <header class="game-header">
+            <button id="back-btn" class="btn btn-blue back-btn">← Back</button>
+            <h2 class="game-name">
+                <span class="cyan">k</span><span class="white">a</span><span class="coral">T</span><span class="white">a</span><span class="coral">k</span><span class="white">u</span><span class="cyan">T</span><span class="white">i</span>
+            </h2>
+            <div class="turn-indicator">
+                <div class="turn-content">
+                    <span id="current-player-indicator" class="player-indicator cyan-bg"></span>
+                    <span id="turn-text">Player 1's Turn</span>
+                </div>
+            </div>
+            <button id="finish-btn" class="btn btn-red">Finish Game</button>
+        </header>
+        
+        <main class="game-main">
+            <div class="score-board">
+                <div class="score-item player1-score">
+                    <div class="player-indicator cyan-bg"></div>
+                    <span id="p1-name-display">Player 1</span>
+                    <span id="p1-score" class="score">0</span>
+                </div>
+                <div class="score-item player2-score">
+                    <div class="player-indicator coral-bg"></div>
+                    <span id="p2-name-display">Player 2</span>
+                    <span id="p2-score" class="score">0</span>
+                </div>
+            </div>
+            
+            <div class="grid-wrapper">
+                <div id="game-grid" class="game-grid"></div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Finish Game Modal -->
+    <div id="finish-modal" class="modal">
+        <div class="modal-content">
+            <h2 id="modal-title">Finish Game?</h2>
+            <p id="modal-message">Are you sure you want to end the current game?</p>
+            <div id="modal-buttons" class="modal-buttons">
+                <button id="resume-btn" class="btn btn-green">Resume Game</button>
+                <button id="new-game-btn" class="btn btn-blue">New Game</button>
+                <button id="quit-btn" class="btn btn-red">Quit Game</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Game Over Modal -->
+    <div id="gameover-modal" class="modal">
+        <div class="modal-content">
+            <h2 id="gameover-title">Game Over</h2>
+            <p id="gameover-message">The game has ended!</p>
+            <div class="modal-buttons">
+                <button id="play-again-btn" class="btn btn-green">Play Again</button>
+                <button id="gameover-new-btn" class="btn btn-blue">New Game</button>
+                <button id="gameover-quit-btn" class="btn btn-red">Quit Game</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
